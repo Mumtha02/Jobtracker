@@ -42,9 +42,13 @@ Helps job seekers keep track of their job applications, statuses, notes, and res
 ## 📂 Folder Structure
 
 Jobapp/
+
 ├── jobtracker# Django backend
+
 ├── jobtrackr-frontend/ # React frontend (Vite)
+
 ├── venv/ # Python virtual environment
+
 └── README.md
 
 ---
