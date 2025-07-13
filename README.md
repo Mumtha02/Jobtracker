@@ -54,38 +54,58 @@ Jobapp/
 ### 1. Backend – Django
 
 bash
+
 cd jobtrackr_backend
+
 python -m venv venv
+
 venv\Scripts\activate        # Windows
+
 pip install -r requirements.txt
+
 python manage.py migrate
+
 python manage.py createsuperuser
+
 python manage.py runserver
 
-**### 2. Frontend – React (Vite)**
+### 2. Frontend – React (Vite)
 bash
-Copy
-Edit
+
 cd jobtrackr-frontend
+
 npm install
+
 npm run dev
 
 Visit frontend: http://localhost:5173
+
 Visit backend: http://localhost:8000
 
 **🔐 API Endpoints**
+
 POST /api/token/ – Get JWT access/refresh token
+
 GET /api/jobs/ – List job applications
+
 POST /api/jobs/ – Add a new job
+
 DELETE /api/jobs/<id>/ – Delete a job
 
 📦 Coming Soon
+
 Job edit & update
+
 User registration
+
 Deployment
+
 Tailwind styling
 
 🧑‍💻 Author
+
 Mumtha Purushothaman
+
 Full-stack Developer | Django • React
+
 https://github.com/Mumtha02/
