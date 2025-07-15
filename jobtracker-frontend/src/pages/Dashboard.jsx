@@ -5,6 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
+  const [formData, setFormData] = useState({
+  company_name: "",
+  position: "",
+  status: "Applied",
+  application_date: "",
+  notes: "",
+});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +29,28 @@ const Dashboard = () => {
     }
   };
 
+  const handleChange = (e) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    await API.post("jobs/", formData);
+    setFormData({
+      company_name: "",
+      position: "",
+      status: "Applied",
+      application_date: "",
+      notes: "",
+    });
+    fetchJobs(); // reload jobs
+  } catch (err) {
+    alert("Error adding job");
+  }
+};
+
+
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this job?")) return;
     try {
@@ -34,7 +63,44 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>My Job Applications</h2>
+<h2>Add Job Application</h2>
+<form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
+  <input
+    name="company_name"
+    placeholder="Company Name"
+    value={formData.company_name}
+    onChange={handleChange}
+    required
+  />
+  <input
+    name="position"
+    placeholder="Position"
+    value={formData.position}
+    onChange={handleChange}
+    required
+  />
+  <input
+    type="date"
+    name="application_date"
+    value={formData.application_date}
+    onChange={handleChange}
+    required
+  />
+  <select name="status" value={formData.status} onChange={handleChange}>
+    <option value="Applied">Applied</option>
+    <option value="Interviewing">Interviewing</option>
+    <option value="Rejected">Rejected</option>
+    <option value="Offer">Offer</option>
+  </select>
+  <textarea
+    name="notes"
+    placeholder="Notes"
+    value={formData.notes}
+    onChange={handleChange}
+  />
+  <button type="submit">Add Job</button>
+</form>
+      
       {jobs.map((job) => (
         <JobCard key={job.id} job={job} onDelete={handleDelete} />
       ))}
